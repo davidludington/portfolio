@@ -3,16 +3,39 @@
 /*
  * Design tokens. These replace the `tailwind.config` object that was previously
  * inlined in the <head> of every HTML page.
+ *
+ * Dark is the baseline; `[data-theme="light"]` below overrides the same
+ * variables, and because Tailwind utilities point at var(--color-*), every
+ * `bg-bg` / `text-textPrimary` etc. follows the active theme automatically.
  */
 @theme {
-	--color-bg: rgb(225 225 225);
-	--color-card: rgb(28 28 28);
-	--color-border: rgb(53 53 53);
-	--color-borderLight: rgb(163 163 163);
-	--color-textPrimary: rgb(155 155 155);
-	--color-textSecondary: rgb(85 85 85);
+	--color-bg: #1e1e1e;
+	--color-card: #262626;
+	--color-border: #3a3a3a;
+	--color-borderLight: #4d4d4d;
+	--color-textPrimary: #d4d4d4;
+	--color-textSecondary: #9a9a9a;
+	--color-accent: #d4b483;
+	--color-onAccent: #1e1e1e;
 
 	--font-poppins: 'Poppins', sans-serif;
+}
+
+:root {
+	color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+	--color-bg: #f4f2ee;
+	--color-card: #ffffff;
+	--color-border: #e0ddd6;
+	--color-borderLight: #cfc9bf;
+	--color-textPrimary: #2b2b2b;
+	--color-textSecondary: #6b6b6b;
+	--color-accent: #8a6d3b;
+	--color-onAccent: #ffffff;
+
+	color-scheme: light;
 }
 
 /*
@@ -40,7 +63,11 @@
 
 	body {
 		font-family: 'Poppins', sans-serif;
-		background-color: rgb(30 30 30);
+		background-color: var(--color-bg);
+		color: var(--color-textPrimary);
+		transition:
+			background-color 300ms ease,
+			color 300ms ease;
 	}
 
 	a,
@@ -50,7 +77,7 @@
 
 	.logo {
 		font-size: 2rem;
-		color: rgb(155 155 155);
+		color: var(--color-textPrimary);
 	}
 
 	.logo a {
@@ -60,7 +87,7 @@
 
 	.logo a:hover {
 		text-decoration: none;
-		color: rgb(155, 155, 155);
+		color: var(--color-accent);
 	}
 
 	.logo:hover {
@@ -80,7 +107,7 @@
 	.hamburger-icon span {
 		width: 100%;
 		height: 2px;
-		background-color: rgb(155, 155, 155);
+		background-color: var(--color-textPrimary);
 		transition: all 0.3s ease-in-out;
 		transform-origin: center;
 	}
@@ -103,7 +130,8 @@
 		top: 100%;
 		right: 0;
 		margin-top: 0.5rem;
-		background-color: rgb(155, 155, 155);
+		background-color: var(--color-card);
+		border: 1px solid var(--color-border);
 		min-width: 150px;
 		max-height: 0;
 		overflow: hidden;
@@ -126,17 +154,18 @@
 		min-height: 48px;
 		padding: 0.75rem 1.5rem;
 		font-size: 1.1rem;
-		color: rgb(255, 255, 255);
+		color: var(--color-textPrimary);
 		text-decoration: none;
 		transition: background-color 0.2s ease;
 	}
 
 	.menu-links a:hover {
-		background-color: rgb(53, 53, 53);
+		background-color: var(--color-border);
+		color: var(--color-accent);
 	}
 
 	.menu-links a:active {
-		background-color: rgb(30 30 30);
+		background-color: var(--color-bg);
 	}
 
 	/* SECTIONS */
@@ -155,6 +184,15 @@
 		height: 2rem;
 	}
 
+	/*
+	 * A few icons (github, linkedin, email, experience, education) are black
+	 * glyphs on transparent, so they vanish on the dark background. Invert them
+	 * only in dark mode; full-colour logos are left alone.
+	 */
+	:root:not([data-theme='light']) .icon-mono {
+		filter: invert(1);
+	}
+
 	/* BUTTONS */
 	.btn-container {
 		display: flex;
@@ -168,27 +206,29 @@
 		padding: 1rem;
 		width: 8rem;
 		border-radius: 2rem;
-		border: rgb(53, 53, 53) 0.1rem solid;
+		border: 0.1rem solid var(--color-borderLight);
+		color: var(--color-textPrimary);
 		cursor: pointer;
 	}
 
-	.btn-color-1,
-	.btn-color-2:hover {
-		background: rgb(53, 53, 53);
-		color: white;
+	.btn-color-1 {
+		background: var(--color-accent);
+		border-color: var(--color-accent);
+		color: var(--color-onAccent);
 	}
 
 	.btn-color-1:hover {
-		background: rgb(0, 0, 0);
+		filter: brightness(1.08);
 	}
 
 	.btn-color-2 {
 		background: none;
-		color: rgb(155, 155, 155);
+		color: var(--color-textPrimary);
 	}
 
 	.btn-color-2:hover {
-		border: rgb(255, 255, 255) 0.1rem solid;
+		border-color: var(--color-accent);
+		color: var(--color-accent);
 	}
 
 	/* CONTACT SECTION */
@@ -196,9 +236,8 @@
 		display: flex;
 		justify-content: center;
 		border-radius: 2rem;
-		border: rgb(53, 53, 53) 0.1rem solid;
-		border-color: rgb(163, 163, 163);
-		background: rgb(200, 200, 200);
+		border: 0.1rem solid var(--color-borderLight);
+		background: var(--color-card);
 		margin: 2rem auto;
 		padding: 0.5rem;
 	}
@@ -247,12 +286,12 @@
 	}
 
 	.nav-links a {
-		color: rgb(85, 85, 85);
+		color: var(--color-textSecondary);
 		text-decoration: none;
 	}
 
 	.nav-links a:hover {
-		color: rgb(155, 155, 155);
+		color: var(--color-textPrimary);
 	}
 
 	/* LIGHTBOX */
@@ -287,7 +326,7 @@
 		position: absolute;
 		top: 20px;
 		right: 30px;
-		color: rgb(155, 155, 155);
+		color: rgb(155 155 155);
 		font-size: 40px;
 		font-weight: bold;
 		cursor: pointer;
@@ -297,6 +336,50 @@
 
 	.lightbox-close:hover {
 		color: white;
+	}
+
+	.lightbox-prev,
+	.lightbox-next {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 3rem;
+		height: 3rem;
+		padding: 0;
+		font-size: 2.5rem;
+		line-height: 1;
+		color: rgb(200 200 200);
+		background: rgba(0, 0, 0, 0.35);
+		border: 1px solid rgba(255, 255, 255, 0.15);
+		border-radius: 9999px;
+		cursor: pointer;
+		transition:
+			background-color 0.2s ease,
+			color 0.2s ease;
+	}
+
+	.lightbox-prev {
+		left: 1.5rem;
+	}
+
+	.lightbox-next {
+		right: 1.5rem;
+	}
+
+	.lightbox-prev:hover,
+	.lightbox-next:hover {
+		color: white;
+		background: rgba(0, 0, 0, 0.6);
+	}
+
+	/* FOCUS */
+	:where(a, button, .btn):focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 3px;
+		border-radius: 4px;
 	}
 
 	@keyframes fadeIn {
@@ -339,5 +422,32 @@
 			flex-direction: column;
 			align-items: center;
 		}
+	}
+}
+
+/* THEME TOGGLE */
+.theme-toggle .icon-moon {
+	display: none;
+}
+
+:root[data-theme='light'] .theme-toggle .icon-sun {
+	display: none;
+}
+
+:root[data-theme='light'] .theme-toggle .icon-moon {
+	display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
 	}
 }

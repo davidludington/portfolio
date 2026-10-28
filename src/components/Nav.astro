@@ -1,5 +1,6 @@
 ---
 import { navLinks, site } from '../data/site';
+import ThemeToggle from './ThemeToggle.astro';
 ---
 
 <nav
@@ -9,20 +10,23 @@ import { navLinks, site } from '../data/site';
 	<div class="logo text-textPrimary text-xl md:text-2xl">
 		<a href="/">{site.name}</a>
 	</div>
-	<div class="hamburger-menu relative">
-		<button
-			type="button"
-			class="hamburger-icon p-2"
-			aria-label="Toggle menu"
-			aria-expanded="false"
-			aria-controls="menuLinks"
-		>
-			<span></span>
-			<span></span>
-			<span></span>
-		</button>
-		<div class="menu-links" id="menuLinks">
-			{navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+	<div class="flex items-center gap-2">
+		<ThemeToggle />
+		<div class="hamburger-menu relative">
+			<button
+				type="button"
+				class="hamburger-icon p-2"
+				aria-label="Toggle menu"
+				aria-expanded="false"
+				aria-controls="menuLinks"
+			>
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+			<div class="menu-links" id="menuLinks">
+				{navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+			</div>
 		</div>
 	</div>
 </nav>
@@ -34,17 +38,20 @@ import { navLinks, site } from '../data/site';
 	<div class="logo text-textPrimary text-2xl">
 		<a href="/">{site.name}</a>
 	</div>
-	<div class="flex gap-8 list-none text-2xl">
-		{
-			navLinks.map((link) => (
-				<a
-					href={link.href}
-					class="text-textPrimary hover:text-white hover:underline hover:underline-offset-[16px] transition-all"
-				>
-					{link.label}
-				</a>
-			))
-		}
+	<div class="flex items-center gap-8">
+		<div class="flex gap-8 list-none text-2xl">
+			{
+				navLinks.map((link) => (
+					<a
+						href={link.href}
+						class="text-textPrimary hover:text-accent hover:underline hover:underline-offset-[16px] transition-all"
+					>
+						{link.label}
+					</a>
+				))
+			}
+		</div>
+		<ThemeToggle />
 	</div>
 </nav>
 
