@@ -131,7 +131,6 @@
 		right: 0;
 		margin-top: 0.5rem;
 		background-color: var(--color-card);
-		border: 1px solid var(--color-border);
 		min-width: 150px;
 		max-height: 0;
 		overflow: hidden;
@@ -145,6 +144,7 @@
 	.menu-links.open {
 		max-height: 300px;
 		padding: 0.5rem 0;
+		border: 1px solid var(--color-border);
 	}
 
 	.menu-links a {
