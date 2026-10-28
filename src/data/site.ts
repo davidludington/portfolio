@@ -69,3 +69,24 @@ export const education = {
   field: 'Computer Science',
   icon: 'education.png',
 } as const;
+
+/** Rendered as the detailed role card on /work. */
+export const experience = {
+  role: 'QA Automation Engineer',
+  company: 'Encyclopedia Britannica',
+  period: 'May 2024 – Present',
+  // summary:
+  // 'Building UI test automation from the ground up for a consumer-facing game platform serving 2 million monthly users.',
+  bullets: [
+    'Built UI test automation from the ground up for a consumer-facing game platform serving 2 million monthly users.',
+    'Automated testing across desktop, iOS, and Android with Python, Selenium, and Appium.',
+    'Reduced automated test execution time by 75% (3 hours to 45 minutes) by migrating legacy unittest suites to Pytest with parallel execution, fixtures, and parameterization.',
+    'Enabled earlier regression detection with GitHub Actions triggered by pull requests, scheduled runs, and production deployments.',
+  ],
+  games: [
+    { name: 'Loop', href: 'https://www.britannica.com/games/loop' },
+    { name: 'Reunion', href: 'https://www.merriam-webster.com/games/reunion' },
+    { name: 'Revealed', href: 'https://www.britannica.com/games/revealed' },
+    { name: 'Tightrope', href: 'https://www.britannica.com/quiz/tightrope' },
+  ],
+} as const;
