@@ -29,7 +29,10 @@ const albumCards = albums.map((album) => ({
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl w-full">
 			{
 				albumCards.map(({ album, cover }) => (
-					<a href={`/creative/${album.id}`} class="group flex flex-col items-center">
+					<a
+						href={`/creative/${album.id}`}
+						class="group relative block overflow-hidden rounded-2xl border border-border"
+					>
 						{cover && (
 							<Image
 								src={cover}
@@ -39,13 +42,19 @@ const albumCards = albums.map((album) => ({
 								sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
 								quality={75}
 								loading="lazy"
-								class="fashion-img w-full aspect-square object-cover rounded-2xl border border-border"
+								class="fashion-img w-full aspect-square object-cover"
 							/>
 						)}
-						<!-- <h2 class="title text-xl md:text-2xl text-center mt-4">{album.data.title}</h2> -->
-						<!-- <p class="fashion-intro text-textSecondary text-center mt-2 max-w-md"> -->
-						<!-- 	{album.data.description} -->
-						<!-- </p> -->
+						<div
+							class="pointer-events-none absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/75 via-black/20 to-transparent p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100"
+						>
+							<h2 class="text-lg md:text-xl font-semibold text-white">
+								{album.data.title}
+							</h2>
+							{album.data.description && (
+								<p class="text-sm text-white/80">{album.data.description}</p>
+							)}
+						</div>
 					</a>
 				))
 			}
