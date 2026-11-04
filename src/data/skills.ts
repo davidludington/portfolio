@@ -16,7 +16,6 @@ export const languages: Skill[] = [
   { name: 'Python', icon: 'pylogo.png' },
   { name: 'Java', icon: 'java_logo.png' },
   { name: 'C/C++', icon: 'c_logo.png' },
-  { name: 'Git', icon: 'git_logo.png' },
   { name: 'HTML', icon: 'HTML_logo.png' },
   { name: 'CSS', icon: 'css_logo.png' },
   { name: 'JavaScript', icon: 'javascript_logo.png' },

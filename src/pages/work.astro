@@ -14,7 +14,6 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
 <BaseLayout title={`Work | ${site.name}`} description="Projects, frameworks, and languages.">
 	<section id="about" class="pt-20 xl:pt-40 px-4 md:px-8 lg:px-40">
-		<!-- <h1 class="title text-3xl md:text-4xl lg:text-5xl text-center mb-8">Work</h1> -->
 		<div class="section-container max-w-4xl mx-auto justify-center">
 			<div
 				class="about-details-container flex flex-col md:flex-row gap-4 md:gap-8 justify-center"
@@ -54,7 +53,6 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 
 
 	<section id="experience" class="pt-20 xl:pt-40 px-4 md:px-8 lg:px-40">
-		<!-- <p class="section__text__p1 text-textSecondary text-center mb-2">Explore My</p> -->
 		<h1 class="title text-3xl md:text-4xl lg:text-5xl text-center mb-8">Experience</h1>
 		<div class="experience-details-container max-w-5xl mx-auto">
 			<div class="details-container p-6 bg-card rounded-2xl border border-borderLight mb-6 md:mb-8">
@@ -69,7 +67,6 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
 						{experience.period}
 					</span>
 				</div>
-				<p class="text-textSecondary mb-4">{experience.summary}</p>
 				<ul class="list-disc marker:text-accent pl-5 space-y-2 text-textPrimary mb-6">
 					{experience.bullets.map((bullet) => <li>{bullet}</li>)}
 				</ul>
