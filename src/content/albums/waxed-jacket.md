@@ -2,7 +2,7 @@
 
 title: "Waxed Canvas"
 description: waxed canvas, wooden buttons, hand sewn buttonholes, herringbone twill lining
-order: 4
+order: 6
 photos:
   - ../../assets/creative/waxed-jacket/IMG_7107.jpg
   - ../../assets/creative/waxed-jacket/IMG_7108.jpg

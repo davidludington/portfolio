@@ -13,11 +13,9 @@ type Props = {
 
 const { title, description = site.description } = Astro.props;
 
-/*
- * Astro.site comes from `site` in astro.config.mjs. Without it the canonical and
- * og:url tags would silently be dropped, so fall back to a relative-safe value.
- */
-const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://davidludington.netlify.app');
+const themeColors = { dark: '#1e1e1e', light: '#f4f2ee' };
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
 
 /*
  * One shared social preview, built once from the headshot and cover-cropped to
@@ -32,7 +30,7 @@ const ogImage = await getImage({
 	position: 'top',
 	format: 'jpg',
 });
-const ogImageUrl = new URL(ogImage.src, Astro.site ?? 'https://davidludington.netlify.app');
+const ogImageUrl = new URL(ogImage.src, Astro.site);
 ---
 
 <!doctype html>
@@ -46,7 +44,12 @@ const ogImageUrl = new URL(ogImage.src, Astro.site ?? 'https://davidludington.ne
 		<title>{title}</title>
 
 		<link rel="canonical" href={canonical} />
-		<meta name="theme-color" content="#1e1e1e" />
+		<meta
+			name="theme-color"
+			content={themeColors.dark}
+			data-dark={themeColors.dark}
+			data-light={themeColors.light}
+		/>
 
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content={site.name} />
@@ -86,7 +89,7 @@ const ogImageUrl = new URL(ogImage.src, Astro.site ?? 'https://davidludington.ne
 								: 'dark';
 					document.documentElement.dataset.theme = theme;
 					const meta = document.querySelector('meta[name="theme-color"]');
-					if (meta) meta.content = theme === 'light' ? '#f4f2ee' : '#1e1e1e';
+					if (meta) meta.content = meta.dataset[theme];
 				} catch {
 					document.documentElement.dataset.theme = 'dark';
 				}

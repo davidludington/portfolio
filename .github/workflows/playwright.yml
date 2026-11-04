@@ -1,0 +1,62 @@
+name: Playwright
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  playwright:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+        with:
+          path: site
+
+      - name: Build and serve site
+        working-directory: site
+        run: |
+          npm ci
+          npm run build
+          npx astro preview --host 127.0.0.1 --port 4321 &
+          npx --yes wait-on http://127.0.0.1:4321
+
+      - name: Check out test suite
+        uses: actions/checkout@v4
+        with:
+          repository: davidludington/porfolio-tests
+          path: tests
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: tests/package-lock.json
+
+      - name: Install dependencies
+        working-directory: tests
+        run: npm ci
+
+      - name: Install Playwright browsers
+        working-directory: tests
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        working-directory: tests
+        run: npx playwright test
+        env:
+          BASE_URL: http://127.0.0.1:4321
+
+      - name: Upload report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: tests/playwright-report/
+          retention-days: 30

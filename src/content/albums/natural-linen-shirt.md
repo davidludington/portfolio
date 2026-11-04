@@ -2,7 +2,7 @@
 title: "Linen Shirt"
 description: undyed linen, wooden buttons, hand sewn buttonholes
 
-order: 4
+order: 5
 photos:
   - ../../assets/creative/natural-linen-shirt/IMG_6322.jpg
   - ../../assets/creative/natural-linen-shirt/IMG_6324.jpg

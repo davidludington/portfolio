@@ -75,8 +75,6 @@ export const experience = {
   role: 'QA Automation Engineer',
   company: 'Encyclopedia Britannica',
   period: 'May 2024 – Present',
-  // summary:
-  // 'Building UI test automation from the ground up for a consumer-facing game platform serving 2 million monthly users.',
   bullets: [
     'Built UI test automation from the ground up for a consumer-facing game platform serving 2 million monthly users.',
     'Automated testing across desktop, iOS, and Android with Python, Selenium, and Appium.',
